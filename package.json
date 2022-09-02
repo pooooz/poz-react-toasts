@@ -52,6 +52,8 @@
   "dependencies": {},
   "scripts": {
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "lint": "npx tsc --noEmit && npx eslint --ext .js,.jsx,.ts,.tsx ./",
+    "lint:fix": "npx tsc --noEmit && npx eslint --ext .js,.jsx,.ts,.tsx --fix ./"
   }
 }
