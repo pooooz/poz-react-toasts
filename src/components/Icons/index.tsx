@@ -8,12 +8,7 @@ export interface IconProps {
 
 export const CrossIcon = ({ type }: IconProps) => (
   <CrossWrap type={type}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="32"
-      height="32"
-      viewBox="0 0 32 32"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
       <g transform="translate(0 -0.001)">
         <path
           className="a"
@@ -26,12 +21,7 @@ export const CrossIcon = ({ type }: IconProps) => (
 
 export const InfoIcon = ({ type }: IconProps) => (
   <IconWrap type={type}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <circle
         className="a"
         cx="3.442"
@@ -54,12 +44,7 @@ export const InfoIcon = ({ type }: IconProps) => (
 
 export const WarningIcon = ({ type }: IconProps) => (
   <IconWrap type={type}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g transform="translate(0 -20.882)">
         <g transform="translate(0 20.882)">
           <path
@@ -82,12 +67,7 @@ export const WarningIcon = ({ type }: IconProps) => (
 
 export const ErrorIcon = ({ type }: IconProps) => (
   <IconWrap type={type}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <g transform="translate(0.198 0.198)">
         <path
           className="a"
@@ -106,12 +86,7 @@ export const ErrorIcon = ({ type }: IconProps) => (
 
 export const SuccessIcon = ({ type }: IconProps) => (
   <IconWrap type={type}>
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="64"
-      height="64"
-      viewBox="0 0 64 64"
-    >
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
       <path
         className="a"
         d="M32,0A32,32,0,1,0,64,32,32.036,32.036,0,0,0,32,0Zm0,61.538A29.538,29.538,0,1,1,61.538,32,29.573,29.573,0,0,1,32,61.538Z"
