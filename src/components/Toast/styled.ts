@@ -73,8 +73,11 @@ export const Message = styled.p<ToastTypeProps>`
 
   overflow: hidden;
 
+  width: ${({ theme }) => theme.containerSizes.s};
+
   @media screen and ${({ theme }) => theme.device.mobileL} {
     margin: 0;
+    width: ${({ theme }) => theme.containerSizes.xs};
     font-size: ${({ theme }) => theme.fontSizes.s};
   }
 `;

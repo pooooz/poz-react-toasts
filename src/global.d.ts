@@ -3,7 +3,7 @@ export {};
 declare global {
   type ToastType = 'info' | 'warning' | 'error' | 'success';
 
-  enum ToastListPosition {
+  export enum ToastListPosition {
     topLeft = 'topLeft',
     topRight = 'topRight',
     bottomLeft = 'bottomLeft',

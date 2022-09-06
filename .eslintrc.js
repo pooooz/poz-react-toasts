@@ -30,13 +30,9 @@ module.exports = {
       alias: {
         map: [
           ['components', './components'],
-          ['containers', './containers'],
-          ['pages', './pages'],
-          ['assets', './assets'],
-          ['utils', './utils'],
-          ['store', './store'],
+          ['core', './core'],
           ['constants', './constants'],
-          ['services', './services'],
+          ['theme', './theme'],
         ],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
@@ -88,24 +84,16 @@ module.exports = {
             group: 'internal',
           },
           {
-            pattern: 'pages/**',
-            group: 'internal',
-          },
-          {
-            pattern: 'store/**',
+            pattern: 'core/**',
             group: 'internal',
           },
           {
             pattern: 'constants/**',
             group: 'internal',
-          },
-          {
-            pattern: 'utils/**',
-            group: 'internal',
             position: 'after',
           },
           {
-            pattern: 'services/**',
+            pattern: 'theme/**',
             group: 'internal',
             position: 'after',
           },
@@ -139,5 +127,7 @@ module.exports = {
     'react-hooks/exhaustive-deps': ['warn'],
     'import/no-extraneous-dependencies': 0,
     'react/jsx-props-no-spreading': 0,
+    'no-use-before-define': 0,
+    'jsx-a11y/label-has-associated-control': 0,
   },
 };

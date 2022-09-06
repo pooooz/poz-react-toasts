@@ -1,22 +1,17 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 
+import { defaultTheme } from 'theme';
+
 import { ToastListWrap } from './styled';
 
-import { Toast } from '../Toast';
-import { defaultTheme } from '../../theme';
-
 export interface ToastListProps {
-  position: ToastListPosition;
+  position: keyof typeof ToastListPosition;
+  children: JSX.Element[] | JSX.Element;
 }
 
-export const ToastList = ({ position }: ToastListProps) => (
+export const ToastList = ({ position, children }: ToastListProps) => (
   <ThemeProvider theme={defaultTheme}>
-    <ToastListWrap position={position}>
-      <Toast heading="Hello there" type="success" />
-      <Toast heading="Hello there" type="warning" />
-      <Toast heading="Basic header" message="Hello there" type="info" />
-      <Toast heading="Hello there" type="error" />
-    </ToastListWrap>
+    <ToastListWrap position={position}>{children}</ToastListWrap>
   </ThemeProvider>
 );

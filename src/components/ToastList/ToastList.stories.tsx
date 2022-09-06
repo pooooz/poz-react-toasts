@@ -1,6 +1,8 @@
 import React from 'react';
 import { Story } from '@storybook/react';
 
+import { Toast } from 'components/Toast';
+
 import { ToastList, ToastListProps } from '.';
 
 export default {
@@ -8,7 +10,19 @@ export default {
   component: ToastList,
 };
 
-const Template: Story<ToastListProps> = (args) => <ToastList {...args} />;
+const heading = 'Basic Header';
+const message =
+  'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ';
+
+const basicToasts = [
+  <Toast heading={heading} message={message} />,
+  <Toast heading={heading} message={message} type="success" />,
+  <Toast heading={heading} message={message} type="warning" />,
+];
+
+const Template: Story<ToastListProps> = (args) => (
+  <ToastList {...args}>{basicToasts}</ToastList>
+);
 
 export const TopLeft = Template.bind({});
 TopLeft.args = {

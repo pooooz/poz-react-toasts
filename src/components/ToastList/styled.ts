@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 interface ToastListWrapProps {
-  position: ToastListPosition;
+  position: keyof typeof ToastListPosition;
 }
 
 export const ToastListWrap = styled.ul<ToastListWrapProps>`
