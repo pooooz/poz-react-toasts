@@ -1,22 +1,52 @@
-import React from 'react';
+import React, {
+  forwardRef,
+  memo,
+  useCallback,
+  useImperativeHandle,
+  useState,
+} from 'react';
 import { ThemeProvider } from 'styled-components';
+import ReactDOM from 'react-dom';
+
+import { defaultTheme } from 'theme';
+import { Toast } from 'components/Toast';
+import { ToastOptions } from 'core';
 
 import { ToastListWrap } from './styled';
 
-import { Toast } from '../Toast';
-import { defaultTheme } from '../../theme';
+export const ToastList = memo(
+  forwardRef<ToastRefActions>((_, ref) => {
+    const [bodyElement] = useState<HTMLElement>(document.body);
+    const [toasts, setToasts] = useState<ToastOptions[]>([]);
+    const [position, setPosition] = useState<ToastListPosition>('bottomLeft');
 
-export interface ToastListProps {
-  position: ToastListPosition;
-}
+    const handleAdd = useCallback((toast: ToastOptions) => {
+      setToasts((prevToasts) => [...prevToasts, toast]);
+    }, []);
 
-export const ToastList = ({ position }: ToastListProps) => (
-  <ThemeProvider theme={defaultTheme}>
-    <ToastListWrap position={position}>
-      <Toast heading="Hello there" type="success" />
-      <Toast heading="Hello there" type="warning" />
-      <Toast heading="Basic header" message="Hello there" type="info" />
-      <Toast heading="Hello there" type="error" />
-    </ToastListWrap>
-  </ThemeProvider>
+    const handleRemove = useCallback((toastId: string) => {
+      setToasts((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
+    }, []);
+
+    const handlePosition = useCallback((newPosition: ToastListPosition) => {
+      setPosition(newPosition);
+    }, []);
+
+    useImperativeHandle(ref, () => ({
+      onAdd: handleAdd,
+      onRemove: handleRemove,
+      onPositionChange: handlePosition,
+    }));
+
+    return ReactDOM.createPortal(
+      <ThemeProvider theme={defaultTheme}>
+        <ToastListWrap position={position}>
+          {toasts.map((toast) => (
+            <Toast key={toast.id} {...toast} />
+          ))}
+        </ToastListWrap>
+      </ThemeProvider>,
+      bodyElement
+    );
+  })
 );

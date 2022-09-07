@@ -1,12 +1,19 @@
+import { ToastOptions } from 'core';
+
 export {};
 
 declare global {
   type ToastType = 'info' | 'warning' | 'error' | 'success';
 
-  enum ToastListPosition {
-    topLeft = 'topLeft',
-    topRight = 'topRight',
-    bottomLeft = 'bottomLeft',
-    bottomRight = 'bottomRight',
+  type ToastListPosition =
+    | 'topLeft'
+    | 'topRight'
+    | 'bottomLeft'
+    | 'bottomRight';
+
+  interface ToastRefActions {
+    onAdd: (toast: ToastOptions) => void;
+    onRemove: (toastId: string) => void;
+    onPositionChange: (position: ToastListPosition) => void;
   }
 }

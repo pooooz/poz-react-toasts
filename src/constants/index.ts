@@ -3,7 +3,7 @@ import {
   InfoIcon,
   SuccessIcon,
   WarningIcon,
-} from '../components/Icons';
+} from 'components/Icons';
 
 export const iconsMap = new Map([
   ['info', InfoIcon],

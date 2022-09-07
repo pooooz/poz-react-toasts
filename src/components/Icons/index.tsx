@@ -6,8 +6,11 @@ export interface IconProps {
   type: ToastType;
 }
 
-export const CrossIcon = ({ type }: IconProps) => (
-  <CrossWrap type={type}>
+interface CrossProps extends IconProps {
+  destroy?: () => void;
+}
+export const CrossIcon = ({ type, destroy }: CrossProps) => (
+  <CrossWrap type={type} onClick={destroy}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
       <g transform="translate(0 -0.001)">
         <path
