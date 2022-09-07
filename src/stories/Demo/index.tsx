@@ -10,15 +10,19 @@ export const Demo = () => {
   const [duration, setDuration] = useState('');
 
   const [type, setType] = useState<ToastType>('info');
+  const [position, setPosition] = useState<ToastListPosition>('topLeft');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    ToastManager.addToast({
-      heading,
-      message,
-      duration: Number(duration),
-      type,
-    });
+    ToastManager.addToast(
+      {
+        heading,
+        message,
+        duration: Number(duration),
+        type,
+      },
+      position
+    );
   };
 
   const handleInputChange =
@@ -27,8 +31,12 @@ export const Demo = () => {
       setValue(event.target.value);
     };
 
-  const handleRadioChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleRadioTypeChange = (event: ChangeEvent<HTMLInputElement>) => {
     setType(event.target.value as ToastType);
+  };
+
+  const handleRadioPositionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setPosition(event.target.value as ToastListPosition);
   };
 
   return (
@@ -55,13 +63,14 @@ export const Demo = () => {
         />
       </fieldset>
       <fieldset>
+        <legend>Type</legend>
         <label>
           <input
             type="radio"
             name="type"
             value="info"
             checked={type === 'info'}
-            onChange={handleRadioChange}
+            onChange={handleRadioTypeChange}
           />
           Info
         </label>
@@ -72,7 +81,7 @@ export const Demo = () => {
             name="type"
             value="warning"
             checked={type === 'warning'}
-            onChange={handleRadioChange}
+            onChange={handleRadioTypeChange}
           />
           Warning
         </label>
@@ -83,7 +92,7 @@ export const Demo = () => {
             name="type"
             value="error"
             checked={type === 'error'}
-            onChange={handleRadioChange}
+            onChange={handleRadioTypeChange}
           />
           Error
         </label>
@@ -94,9 +103,55 @@ export const Demo = () => {
             name="type"
             value="success"
             checked={type === 'success'}
-            onChange={handleRadioChange}
+            onChange={handleRadioTypeChange}
           />
           Success
+        </label>
+      </fieldset>
+      <fieldset>
+        <legend>Position</legend>
+        <label>
+          <input
+            type="radio"
+            name="position"
+            value="topLeft"
+            checked={position === 'topLeft'}
+            onChange={handleRadioPositionChange}
+          />
+          Top left
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="position"
+            value="topRight"
+            checked={position === 'topRight'}
+            onChange={handleRadioPositionChange}
+          />
+          Top right
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="position"
+            value="bottomLeft"
+            checked={position === 'bottomLeft'}
+            onChange={handleRadioPositionChange}
+          />
+          Bottom left
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="position"
+            value="bottomRight"
+            checked={position === 'bottomRight'}
+            onChange={handleRadioPositionChange}
+          />
+          Bottom right
         </label>
       </fieldset>
       <button type="submit">Click me</button>

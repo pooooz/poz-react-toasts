@@ -16,6 +16,8 @@ class ToastManager {
 
   private containerRef: HTMLDivElement | null = null;
 
+  private position: ToastListPosition = 'bottomRight';
+
   private rootElement: HTMLDivElement;
 
   private constructor() {
@@ -30,7 +32,13 @@ class ToastManager {
     return ToastManager.instance;
   }
 
-  public addToast(options: Omit<ToastProps, 'destroy'>) {
+  public addToast(
+    options: Omit<ToastProps, 'destroy'>,
+    position?: ToastListPosition
+  ) {
+    if (position) {
+      this.position = position;
+    }
     const toastId = nanoid();
     const destroy = () => this.removeToast(toastId);
 
@@ -62,7 +70,7 @@ class ToastManager {
     }
 
     ReactDOM.render(
-      <ToastList position="bottomLeft">{toastsList}</ToastList>,
+      <ToastList position={this.position}>{toastsList}</ToastList>,
       this.containerRef
     );
   }

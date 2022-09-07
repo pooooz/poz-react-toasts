@@ -6,7 +6,7 @@ import { defaultTheme } from 'theme';
 import { ToastListWrap } from './styled';
 
 export interface ToastListProps {
-  position: keyof typeof ToastListPosition;
+  position: ToastListPosition;
   children: JSX.Element[] | JSX.Element;
 }
 
