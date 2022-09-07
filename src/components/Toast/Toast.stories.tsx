@@ -1,7 +1,8 @@
 import React from 'react';
 import { Story } from '@storybook/react';
+import { ThemeProvider } from 'styled-components';
 
-import { ToastList } from 'components/ToastList';
+import { defaultTheme } from 'theme';
 
 import { Toast, ToastProps } from '.';
 
@@ -16,13 +17,13 @@ export default {
 };
 
 const Template: Story<ToastProps> = (args) => (
-  <ToastList position="topLeft">
+  <ThemeProvider theme={defaultTheme}>
     <Toast {...args} />
-  </ToastList>
+  </ThemeProvider>
 );
 
 const heading = 'Basic Header';
-const message = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed ';
+const message = 'Lorem ipsum dolor sit ';
 const generalArgs = {
   heading,
   message,
