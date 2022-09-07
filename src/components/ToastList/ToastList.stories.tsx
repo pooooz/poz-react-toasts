@@ -3,7 +3,7 @@ import { Story } from '@storybook/react';
 
 import { Toast } from 'components/Toast';
 
-import { ToastList, ToastListProps } from '.';
+import { ToastList } from '.';
 
 export default {
   title: 'components/ToastList',

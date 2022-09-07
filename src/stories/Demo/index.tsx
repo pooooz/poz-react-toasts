@@ -1,8 +1,10 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
-import ToastManager from 'core';
+import { ToastManager } from 'core';
 
 import { Form } from './styled';
+
+import { ToastContainer } from '../../containers/ToastContainer';
 
 export const Demo = () => {
   const [heading, setHeading] = useState('');
@@ -10,19 +12,16 @@ export const Demo = () => {
   const [duration, setDuration] = useState('');
 
   const [type, setType] = useState<ToastType>('info');
-  const [position, setPosition] = useState<ToastListPosition>('topLeft');
+  const [position, setPosition] = useState<ToastListPosition>('bottomLeft');
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    ToastManager.addToast(
-      {
-        heading,
-        message,
-        duration: Number(duration),
-        type,
-      },
-      position
-    );
+    ToastManager.addToast({
+      heading,
+      message,
+      duration: Number(duration),
+      type,
+    });
   };
 
   const handleInputChange =
@@ -36,11 +35,13 @@ export const Demo = () => {
   };
 
   const handleRadioPositionChange = (event: ChangeEvent<HTMLInputElement>) => {
+    ToastManager.setPosition(event.target.value as ToastListPosition);
     setPosition(event.target.value as ToastListPosition);
   };
 
   return (
     <Form onSubmit={handleSubmit}>
+      <ToastContainer />
       <fieldset>
         <legend>Heading</legend>
         <input

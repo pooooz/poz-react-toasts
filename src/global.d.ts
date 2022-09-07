@@ -1,3 +1,5 @@
+import { ToastOptions } from 'core';
+
 export {};
 
 declare global {
@@ -8,4 +10,10 @@ declare global {
     | 'topRight'
     | 'bottomLeft'
     | 'bottomRight';
+
+  interface ToastRefActions {
+    onAdd: (toast: ToastOptions) => void;
+    onRemove: (toastId: string) => void;
+    onPositionChange: (position: ToastListPosition) => void;
+  }
 }

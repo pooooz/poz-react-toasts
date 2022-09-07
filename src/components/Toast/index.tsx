@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { memo, useEffect } from 'react';
 
 import { CrossIcon } from 'components/Icons';
 
@@ -14,33 +14,29 @@ export interface ToastProps {
   destroy?: () => void;
 }
 
-export const Toast = ({
-  type = 'info',
-  heading,
-  message,
-  duration,
-  destroy,
-}: ToastProps) => {
-  const Icon = iconsMap.get(type);
+export const Toast = memo(
+  ({ type = 'info', heading, message, duration, destroy }: ToastProps) => {
+    const Icon = iconsMap.get(type);
 
-  useEffect(() => {
-    if (!duration || !destroy) return;
+    useEffect(() => {
+      if (!duration || !destroy) return;
 
-    const timer = setTimeout(() => {
-      destroy();
-    }, duration);
+      const timer = setTimeout(() => {
+        destroy();
+      }, duration);
 
-    return () => clearTimeout(timer);
-  }, [destroy, duration]);
+      return () => clearTimeout(timer);
+    }, [destroy, duration]);
 
-  return (
-    <ToastWrap type={type}>
-      {Icon && <Icon type={type} />}
-      <TextWrap position={message ? 'normal' : 'center'}>
-        <Heading type={type}>{heading}</Heading>
-        {message && <Message type={type}>{message}</Message>}
-      </TextWrap>
-      <CrossIcon type={type} destroy={destroy} />
-    </ToastWrap>
-  );
-};
+    return (
+      <ToastWrap type={type}>
+        {Icon && <Icon type={type} />}
+        <TextWrap position={message ? 'normal' : 'center'}>
+          <Heading type={type}>{heading}</Heading>
+          {message && <Message type={type}>{message}</Message>}
+        </TextWrap>
+        <CrossIcon type={type} destroy={destroy} />
+      </ToastWrap>
+    );
+  }
+);

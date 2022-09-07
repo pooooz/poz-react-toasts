@@ -1,44 +1,34 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { RefObject } from 'react';
 import { nanoid } from 'nanoid';
 
-import { Toast, ToastProps } from 'components/Toast';
-import { ToastList } from 'components/ToastList';
+import { ToastProps } from 'components/Toast';
 
-interface ToastOptions extends ToastProps {
+export interface ToastOptions extends ToastProps {
   id: string;
 }
 
-class ToastManager {
-  private static instance: ToastManager;
+class ToastService {
+  private static instance: ToastService;
 
   private toasts: Array<ToastOptions> = [];
 
-  private containerRef: HTMLDivElement | null = null;
+  private position: ToastListPosition = 'bottomLeft';
 
-  private position: ToastListPosition = 'bottomRight';
+  private containerRef: RefObject<ToastRefActions> | null = null;
 
-  private rootElement: HTMLDivElement;
-
-  private constructor() {
-    this.rootElement = document.getElementById('root') as HTMLDivElement;
-  }
-
-  public static getInstance(): ToastManager {
-    if (!ToastManager.instance) {
-      ToastManager.instance = new ToastManager();
+  public static getInstance(): ToastService {
+    if (!ToastService.instance) {
+      ToastService.instance = new ToastService();
     }
 
-    return ToastManager.instance;
+    return ToastService.instance;
   }
 
-  public addToast(
-    options: Omit<ToastProps, 'destroy'>,
-    position?: ToastListPosition
-  ) {
-    if (position) {
-      this.position = position;
-    }
+  public init(ref: RefObject<ToastRefActions>) {
+    this.containerRef = ref;
+  }
+
+  public addToast(options: Omit<ToastProps, 'destroy'>) {
     const toastId = nanoid();
     const destroy = () => this.removeToast(toastId);
 
@@ -49,31 +39,18 @@ class ToastManager {
     };
 
     this.toasts = [...this.toasts, newToast];
+    this.containerRef?.current?.onAdd(newToast);
+  }
 
-    this.render();
+  public setPosition(position: ToastListPosition) {
+    this.position = position;
+    this.containerRef?.current?.onPositionChange(position);
   }
 
   public removeToast(toastId: string) {
     this.toasts = this.toasts.filter(({ id }) => id !== toastId);
-
-    this.render();
-  }
-
-  private render() {
-    const toastsList = this.toasts.map((toastOptions) => (
-      <Toast key={toastOptions.id} {...toastOptions} />
-    ));
-
-    if (!this.containerRef) {
-      this.containerRef = document.createElement('div');
-      this.rootElement.insertAdjacentElement('beforeend', this.containerRef);
-    }
-
-    ReactDOM.render(
-      <ToastList position={this.position}>{toastsList}</ToastList>,
-      this.containerRef
-    );
+    this.containerRef?.current?.onRemove(toastId);
   }
 }
 
-export default ToastManager.getInstance();
+export const ToastManager = ToastService.getInstance();
