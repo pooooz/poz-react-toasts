@@ -31,6 +31,7 @@ module.exports = {
         map: [
           ['components', './components'],
           ['containers', './containers'],
+          ['hooks', './hooks'],
           ['core', './core'],
           ['constants', './constants'],
           ['theme', './theme'],
@@ -86,6 +87,10 @@ module.exports = {
           },
           {
             pattern: 'containers/**',
+            group: 'internal',
+          },
+          {
+            pattern: 'hooks/**',
             group: 'internal',
           },
           {

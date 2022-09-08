@@ -6,7 +6,6 @@ const toastBorderRadius = '24px';
 
 interface ToastWrapProps {
   type: ToastType;
-  duration?: number;
   animationName: InAnimationName | OutAnimationName | null;
   animationTime?: number;
 }
@@ -27,9 +26,9 @@ export const ToastWrap = styled.div<ToastWrapProps>`
       }
       return 'none';
     }}
-    ${({ animationTime, duration }) => {
-      if (duration) {
-        return animationTime || duration - 1000;
+    ${({ animationTime }) => {
+      if (animationTime) {
+        return animationTime;
       }
       return 1000;
     }}ms;

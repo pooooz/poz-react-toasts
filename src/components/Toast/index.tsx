@@ -1,6 +1,7 @@
-import React, { memo, useEffect, useState } from 'react';
+import React, { memo, useState } from 'react';
 
 import { CrossIcon } from 'components/Icons';
+import { useAnimation } from 'hooks';
 
 import { iconsMap } from 'constants/index';
 
@@ -28,55 +29,56 @@ export const Toast = memo(
     animationTime,
     destroy,
   }: ToastProps) => {
-    const [animation, setAnimation] = useState<
-      InAnimationName | OutAnimationName | null
-    >(inAnimationName || null);
+    const { animation, handleDelete } = useAnimation({
+      inAnimationName,
+      outAnimationName,
+      animationTime,
+      destroy,
+      duration,
+    });
+
+    const [startX, setStartX] = useState(0);
+    const [startY, setStartY] = useState(0);
 
     const Icon = iconsMap.get(type);
 
-    let animationTimer: NodeJS.Timer;
-    let destroyTimer: NodeJS.Timer;
-
-    useEffect(() => {
-      if (!duration || !destroy) return;
-
-      if (outAnimationName) {
-        animationTimer = setTimeout(() => {
-          setAnimation(outAnimationName as OutAnimationName);
-        }, duration - (animationTime || 0));
-      }
-
-      destroyTimer = setTimeout(() => {
-        destroy();
-      }, duration);
-
-      return () => {
-        clearTimeout(animationTimer);
-        clearTimeout(destroyTimer);
-      };
-    }, [destroy, duration]);
-
-    const handleDelete = () => {
-      if (destroyTimer) {
-        clearTimeout(destroyTimer);
-      }
-      if (animationTimer) {
-        clearTimeout(animationTimer);
-      }
-
-      if (!outAnimationName) {
-        destroy();
-      }
-      setAnimation(outAnimationName as OutAnimationName);
-      setTimeout(() => destroy(), (animationTime || 1000) - 100);
+    const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+      setStartX(event.touches[0].clientX);
+      setStartY(event.touches[0].clientY);
     };
 
+    const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+      if (
+        Math.abs(startX - event.touches[0].clientX) > 100 ||
+        Math.abs(startY - event.touches[0].clientY) > 100
+      ) {
+        handleDelete();
+      }
+    };
+
+    const handleDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+      setStartX(event.clientX);
+      setStartY(event.clientY);
+    };
+
+    const handleDragEnd = (event: React.DragEvent<HTMLDivElement>) => {
+      if (
+        Math.abs(startX - event.clientX) > 100 ||
+        Math.abs(startY - event.clientY) > 100
+      ) {
+        handleDelete();
+      }
+    };
     return (
       <ToastWrap
         type={type}
         animationName={animation}
         animationTime={animationTime}
-        duration={duration}
+        draggable
+        onDragStart={handleDragStart}
+        onDragEnd={handleDragEnd}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
       >
         {Icon && <Icon type={type} />}
         <TextWrap position={message ? 'normal' : 'center'}>

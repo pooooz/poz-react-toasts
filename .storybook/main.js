@@ -10,6 +10,7 @@ module.exports = {
       ...config.resolve.alias,
       'components': path.resolve(__dirname, "../src/components"),
       'containers': path.resolve(__dirname, "../src/containers"),
+      'hooks': path.resolve(__dirname, "../src/hooks"),
       'core': path.resolve(__dirname, "../src/core"),
       'constants': path.resolve(__dirname, "../src/constants"),
       'theme': path.resolve(__dirname, "../src/theme"),
