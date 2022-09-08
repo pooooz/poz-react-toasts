@@ -1,14 +1,38 @@
 import styled from 'styled-components';
 
+import { inAnimations, outAnimations } from './animations';
+
 const toastBorderRadius = '24px';
+
+interface ToastWrapProps {
+  type: ToastType;
+  duration?: number;
+  animationName: InAnimationName | OutAnimationName | null;
+  animationTime?: number;
+}
 
 interface ToastTypeProps {
   type: ToastType;
 }
-export const ToastWrap = styled.div<ToastTypeProps>`
+export const ToastWrap = styled.div<ToastWrapProps>`
   display: flex;
   align-items: center;
   position: relative;
+
+  animation: ${({ animationName }) => {
+      if (animationName) {
+        return animationName in inAnimations
+          ? inAnimations[animationName as InAnimationName]
+          : outAnimations[animationName as OutAnimationName];
+      }
+      return 'none';
+    }}
+    ${({ animationTime, duration }) => {
+      if (duration) {
+        return animationTime || duration - 1000;
+      }
+      return 1000;
+    }}ms;
 
   padding: ${({ theme }) => theme.spaces.s} ${({ theme }) => theme.spaces.xl};
   margin: ${({ theme }) => theme.spaces.s} 0 0 0;

@@ -1,4 +1,5 @@
 import { ToastOptions } from 'core';
+import { inAnimations, outAnimations } from 'components/Toast/animations';
 
 export {};
 
@@ -16,4 +17,7 @@ declare global {
     onRemove: (toastId: string) => void;
     onPositionChange: (position: ToastListPosition) => void;
   }
+
+  type InAnimationName = keyof typeof inAnimations;
+  type OutAnimationName = keyof typeof outAnimations;
 }

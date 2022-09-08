@@ -1,18 +1,25 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
 import { ToastManager } from 'core';
+import { inAnimations, outAnimations } from 'components/Toast/animations';
+import { ToastContainer } from 'containers/ToastContainer';
 
 import { Form } from './styled';
-
-import { ToastContainer } from '../../containers/ToastContainer';
 
 export const Demo = () => {
   const [heading, setHeading] = useState('');
   const [message, setMessage] = useState('');
   const [duration, setDuration] = useState('');
+  const [animationTime, setAnimationTime] = useState('');
 
   const [type, setType] = useState<ToastType>('info');
   const [position, setPosition] = useState<ToastListPosition>('bottomLeft');
+  const [inAnimation, setInAnimation] = useState<InAnimationName | undefined>(
+    undefined
+  );
+  const [outAnimation, setOutAnimation] = useState<
+    OutAnimationName | undefined
+  >(undefined);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -21,6 +28,9 @@ export const Demo = () => {
       message,
       duration: Number(duration),
       type,
+      inAnimationName: inAnimation,
+      outAnimationName: outAnimation,
+      animationTime: Number(animationTime),
     });
   };
 
@@ -37,6 +47,18 @@ export const Demo = () => {
   const handleRadioPositionChange = (event: ChangeEvent<HTMLInputElement>) => {
     ToastManager.setPosition(event.target.value as ToastListPosition);
     setPosition(event.target.value as ToastListPosition);
+  };
+
+  const handleRadioInAnimationChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setInAnimation(event.target.value as InAnimationName);
+  };
+
+  const handleRadioOutAnimationChange = (
+    event: ChangeEvent<HTMLInputElement>
+  ) => {
+    setOutAnimation(event.target.value as OutAnimationName);
   };
 
   return (
@@ -154,6 +176,82 @@ export const Demo = () => {
           />
           Bottom right
         </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>In animation</legend>
+        <label>
+          <input
+            type="radio"
+            name="inAnimation"
+            value={undefined}
+            checked={!inAnimation}
+            onChange={handleRadioInAnimationChange}
+          />
+          None
+        </label>
+        {Object.keys(inAnimations).map((animationName) => (
+          <label key={animationName}>
+            <input
+              type="radio"
+              name="inAnimation"
+              value={animationName}
+              checked={inAnimation === animationName}
+              onChange={handleRadioInAnimationChange}
+            />
+            {animationName
+              .split('-')
+              .map((word, idx) =>
+                idx === 0
+                  ? word[0].toUpperCase() + word.toLowerCase().slice(1)
+                  : word.toLowerCase()
+              )
+              .join(' ')}
+          </label>
+        ))}
+      </fieldset>
+
+      <fieldset>
+        <legend>Out animation</legend>
+        <label>
+          <input
+            type="radio"
+            name="outAnimation"
+            value={undefined}
+            checked={!outAnimation}
+            onChange={handleRadioOutAnimationChange}
+          />
+          None
+        </label>
+        {Object.keys(outAnimations).map((animationName) => (
+          <label key={animationName}>
+            <input
+              type="radio"
+              name="outAnimation"
+              value={animationName}
+              checked={outAnimation === animationName}
+              onChange={handleRadioOutAnimationChange}
+            />
+            {animationName
+              .split('-')
+              .map((word, idx) =>
+                idx === 0
+                  ? word[0].toUpperCase() + word.toLowerCase().slice(1)
+                  : word.toLowerCase()
+              )
+              .join(' ')}
+          </label>
+        ))}
+      </fieldset>
+
+      <fieldset>
+        <legend>Animation Time</legend>
+        <input
+          value={animationTime}
+          onChange={handleInputChange(setAnimationTime)}
+          type="number"
+          step={1000}
+        />
       </fieldset>
       <button type="submit">Click me</button>
     </Form>

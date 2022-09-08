@@ -30,6 +30,7 @@ module.exports = {
       alias: {
         map: [
           ['components', './components'],
+          ['containers', './containers'],
           ['core', './core'],
           ['constants', './constants'],
           ['theme', './theme'],
@@ -81,6 +82,10 @@ module.exports = {
         pathGroups: [
           {
             pattern: 'components/**',
+            group: 'internal',
+          },
+          {
+            pattern: 'containers/**',
             group: 'internal',
           },
           {
