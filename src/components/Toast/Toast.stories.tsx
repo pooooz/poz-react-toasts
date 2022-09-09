@@ -30,7 +30,16 @@ const generalArgs = {
 };
 
 const generalParameters = {
-  controls: { exclude: ['type', 'destroy', 'duration'] },
+  controls: {
+    exclude: [
+      'type',
+      'destroy',
+      'duration',
+      'inAnimationName',
+      'outAnimationName',
+      'animationTime',
+    ],
+  },
 };
 
 export const Info = Template.bind({});

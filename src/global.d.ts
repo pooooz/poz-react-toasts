@@ -1,4 +1,5 @@
 import { ToastOptions } from 'core';
+import { inAnimations, outAnimations } from 'components/Toast/animations';
 
 export {};
 
@@ -12,8 +13,10 @@ declare global {
     | 'bottomRight';
 
   interface ToastRefActions {
-    onAdd: (toast: ToastOptions) => void;
-    onRemove: (toastId: string) => void;
+    onToastChange: (toasts: ToastOptions[]) => void;
     onPositionChange: (position: ToastListPosition) => void;
   }
+
+  type InAnimationName = keyof typeof inAnimations;
+  type OutAnimationName = keyof typeof outAnimations;
 }

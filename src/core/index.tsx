@@ -12,6 +12,8 @@ class ToastService {
 
   private toasts: Array<ToastOptions> = [];
 
+  private toastQueue: Array<ToastOptions> = [];
+
   private position: ToastListPosition = 'bottomLeft';
 
   private containerRef: RefObject<ToastRefActions> | null = null;
@@ -38,8 +40,13 @@ class ToastService {
       ...options,
     };
 
-    this.toasts = [...this.toasts, newToast];
-    this.containerRef?.current?.onAdd(newToast);
+    if (this.toasts.length >= 3) {
+      this.toastQueue.push(newToast);
+    } else {
+      this.toasts = [...this.toasts, newToast];
+    }
+
+    this.containerRef?.current?.onToastChange(this.toasts);
   }
 
   public setPosition(position: ToastListPosition) {
@@ -48,8 +55,18 @@ class ToastService {
   }
 
   public removeToast(toastId: string) {
-    this.toasts = this.toasts.filter(({ id }) => id !== toastId);
-    this.containerRef?.current?.onRemove(toastId);
+    if (this.toasts.length >= 3) {
+      this.toasts = this.toasts.filter(({ id }) => id !== toastId);
+      const nextToast = this.toastQueue.pop();
+
+      if (nextToast) {
+        this.toasts = [...this.toasts, nextToast];
+      }
+    } else {
+      this.toasts = this.toasts.filter(({ id }) => id !== toastId);
+    }
+
+    this.containerRef?.current?.onToastChange(this.toasts);
   }
 }
 

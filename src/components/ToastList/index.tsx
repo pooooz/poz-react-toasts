@@ -20,12 +20,8 @@ export const ToastList = memo(
     const [toasts, setToasts] = useState<ToastOptions[]>([]);
     const [position, setPosition] = useState<ToastListPosition>('bottomLeft');
 
-    const handleAdd = useCallback((toast: ToastOptions) => {
-      setToasts((prevToasts) => [...prevToasts, toast]);
-    }, []);
-
-    const handleRemove = useCallback((toastId: string) => {
-      setToasts((prevToasts) => prevToasts.filter(({ id }) => id !== toastId));
+    const handleToastChange = useCallback((toasts: ToastOptions[]) => {
+      setToasts(toasts);
     }, []);
 
     const handlePosition = useCallback((newPosition: ToastListPosition) => {
@@ -33,8 +29,7 @@ export const ToastList = memo(
     }, []);
 
     useImperativeHandle(ref, () => ({
-      onAdd: handleAdd,
-      onRemove: handleRemove,
+      onToastChange: handleToastChange,
       onPositionChange: handlePosition,
     }));
 
