@@ -10,11 +10,12 @@ import { ToastListWrap } from './styled';
 const heading = 'Basic Header';
 const message =
   'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do ';
+const destroy = () => null;
 
 const toasts = [
-  { id: '1', heading, message },
-  { id: '2', heading, message, type: 'success' as ToastType },
-  { id: '3', heading, message, type: 'warning' as ToastType },
+  { id: '1', heading, message, destroy },
+  { id: '2', heading, message, type: 'success' as ToastType, destroy },
+  { id: '3', heading, message, type: 'warning' as ToastType, destroy },
 ];
 
 const ToastList = ({ position }: { position: ToastListPosition }) => (
