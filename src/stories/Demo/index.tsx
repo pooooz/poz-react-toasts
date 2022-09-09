@@ -10,6 +10,7 @@ export const Demo = () => {
   const [heading, setHeading] = useState('');
   const [message, setMessage] = useState('');
   const [duration, setDuration] = useState('');
+  const [spaces, setSpaces] = useState('');
   const [animationTime, setAnimationTime] = useState('');
 
   const [type, setType] = useState<ToastType>('info');
@@ -31,6 +32,7 @@ export const Demo = () => {
       inAnimationName: inAnimation,
       outAnimationName: outAnimation,
       animationTime: Number(animationTime),
+      spaces,
     });
   };
 
@@ -59,6 +61,10 @@ export const Demo = () => {
     event: ChangeEvent<HTMLInputElement>
   ) => {
     setOutAnimation(event.target.value as OutAnimationName);
+  };
+
+  const handleSpaces = (event: ChangeEvent<HTMLInputElement>) => {
+    setSpaces(event.target.value);
   };
 
   return (
@@ -252,6 +258,10 @@ export const Demo = () => {
           type="number"
           step={1000}
         />
+      </fieldset>
+      <fieldset>
+        <legend>Spaces</legend>
+        <input value={spaces} onChange={handleSpaces} />
       </fieldset>
       <button type="submit">Click me</button>
     </Form>

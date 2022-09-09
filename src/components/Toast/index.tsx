@@ -16,6 +16,7 @@ export interface ToastProps {
   outAnimationName?: OutAnimationName;
   animationTime?: number;
   destroy: () => void;
+  spaces?: string;
 }
 
 export const Toast = memo(
@@ -28,6 +29,7 @@ export const Toast = memo(
     outAnimationName,
     animationTime,
     destroy,
+    spaces,
   }: ToastProps) => {
     const { animation, handleDelete } = useAnimation({
       inAnimationName,
@@ -79,6 +81,7 @@ export const Toast = memo(
         onDragEnd={handleDragEnd}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
+        spaces={spaces}
       >
         {Icon && <Icon type={type} />}
         <TextWrap position={message ? 'normal' : 'center'}>
