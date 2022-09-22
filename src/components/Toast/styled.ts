@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { inAnimations, outAnimations } from 'helpers/animations';
+import { determineAnimation } from 'helpers/animations';
 
 import { TextWrapProps, ToastTypeProps, ToastWrapProps } from './interfaces';
 
@@ -14,14 +14,7 @@ export const ToastWrap = styled.div<ToastWrapProps>`
   align-items: center;
   position: relative;
 
-  animation: ${({ animationName }) => {
-      if (animationName) {
-        return animationName in inAnimations
-          ? inAnimations[animationName as InAnimationName]
-          : outAnimations[animationName as OutAnimationName];
-      }
-      return 'none';
-    }}
+  animation: ${({ animationName }) => determineAnimation(animationName)}
     ${({ animationTime }) => {
       if (animationTime) {
         return animationTime;
