@@ -1,15 +1,5 @@
 import { DefaultTheme } from 'styled-components';
 
-const sizes = {
-  mobileS: '320px',
-  mobileM: '375px',
-  mobileL: '425px',
-  tablet: '768px',
-  laptop: '1024px',
-  laptopL: '1440px',
-  desktop: '1920px',
-};
-
 const whiteColor = '#FFFFFF';
 const blackColor = '#000000';
 
@@ -37,52 +27,62 @@ const type = {
   },
 };
 
+const sizes = {
+  mobileS: 320,
+  mobileM: 375,
+  mobileL: 425,
+  tablet: 768,
+  laptop: 1024,
+  laptopL: 1440,
+  desktop: 1920,
+};
+
 const device = {
-  mobileS: `(max-width: ${sizes.mobileS})`,
-  mobileM: `(max-width: ${sizes.mobileM})`,
-  mobileL: `(max-width: ${sizes.mobileL})`,
-  tablet: `(max-width: ${sizes.tablet})`,
-  laptop: `(max-width: ${sizes.laptop})`,
-  laptopL: `(max-width: ${sizes.laptopL})`,
-  desktop: `(max-width: ${sizes.desktop})`,
-  desktopL: `(max-width: ${sizes.desktop})`,
+  mobileS: `(max-width: ${sizes.mobileS}px)`,
+  mobileM: `(max-width: ${sizes.mobileM}px)`,
+  mobileL: `(max-width: ${sizes.mobileL}px)`,
+  tablet: `(max-width: ${sizes.tablet}px)`,
+  laptop: `(max-width: ${sizes.laptop}px)`,
+  laptopL: `(max-width: ${sizes.laptopL}px)`,
+  desktop: `(max-width: ${sizes.desktop}px)`,
+  desktopL: `(max-width: ${sizes.desktop}px)`,
 };
 
 const iconSizes = {
-  s: '24px',
-  m: '32px',
-  l: '48px',
+  s: 24,
+  m: 32,
+  l: 48,
   crossSizes: {
-    s: '12px',
-    m: '18px',
-    l: '20px',
+    s: 12,
+    m: 18,
+    l: 20,
   },
 };
 
 const toastHeights = {
-  s: '35px',
-  m: '50px',
-  l: '70px',
+  s: 35,
+  m: 50,
+  l: 70,
 };
 
 const containerSizes = {
-  xs: '150px',
-  s: '250px',
-  m: '300px',
-  l: '400px',
+  xs: 150,
+  s: 250,
+  m: 300,
+  l: 400,
 };
 
 const spaces = {
-  s: '10px',
-  l: '24px',
-  xl: '32px',
-  xxl: '50px',
+  s: 10,
+  l: 24,
+  xl: 32,
+  xxl: 50,
 };
 
 const fontSizes = {
-  s: '12px',
-  m: '18px',
-  l: '24px',
+  s: 12,
+  m: 18,
+  l: 24,
 };
 
 export const defaultTheme: DefaultTheme = {

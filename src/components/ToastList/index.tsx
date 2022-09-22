@@ -5,12 +5,10 @@ import React, {
   useImperativeHandle,
   useState,
 } from 'react';
-import { ThemeProvider } from 'styled-components';
 import ReactDOM from 'react-dom';
 
-import { defaultTheme } from 'theme';
 import { Toast } from 'components/Toast';
-import { ToastOptions } from 'core';
+import { ToastOptions } from 'services/ToastService';
 
 import { ToastListWrap } from './styled';
 
@@ -34,13 +32,11 @@ export const ToastList = memo(
     }));
 
     return ReactDOM.createPortal(
-      <ThemeProvider theme={defaultTheme}>
-        <ToastListWrap position={position}>
-          {toasts.map((toast) => (
-            <Toast key={toast.id} {...toast} />
-          ))}
-        </ToastListWrap>
-      </ThemeProvider>,
+      <ToastListWrap position={position}>
+        {toasts.map((toast) => (
+          <Toast key={toast.id} {...toast} />
+        ))}
+      </ToastListWrap>,
       bodyElement
     );
   })

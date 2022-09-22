@@ -1,8 +1,6 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
-interface ToastListWrapProps {
-  position: ToastListPosition;
-}
+import { ToastListWrapProps } from './interfaces';
 
 export const ToastListWrap = styled.ul<ToastListWrapProps>`
   padding: 0;
@@ -10,26 +8,19 @@ export const ToastListWrap = styled.ul<ToastListWrapProps>`
   flex-direction: column;
   justify-content: space-between;
   position: fixed;
-  ${({ position }) =>
-    css`
-      margin-top: 10px;
-      margin-bottom: 10px;
-      ${position.includes('top') ? 'top' : 'bottom'}: 0;
-    `}
-  ${({ position }) =>
-    css`
-      margin-left: 10px;
-      margin-right: 10px;
-      ${position.toLowerCase().includes('left') ? 'left' : 'right'}: 0;
-    `}
+  margin: ${({ theme }) => theme.spaces.s}px;
 
-  width: ${({ theme }) => theme.containerSizes.l};
+  ${({ position }) => (position.includes('top') ? 'top' : 'bottom')}: 0;
+  ${({ position }) =>
+    position.toLowerCase().includes('left') ? 'left' : 'right'}: 0;
+
+  width: ${({ theme }) => theme.containerSizes.l}px;
 
   @media screen and ${({ theme }) => theme.device.tablet} {
-    width: ${({ theme }) => theme.containerSizes.m};
+    width: ${({ theme }) => theme.containerSizes.m}px;
   }
 
   @media screen and ${({ theme }) => theme.device.mobileL} {
-    width: ${({ theme }) => theme.containerSizes.s};
+    width: ${({ theme }) => theme.containerSizes.s}px;
   }
 `;

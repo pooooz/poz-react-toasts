@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 import { nanoid } from 'nanoid';
 
-import { ToastProps } from 'components/Toast';
+import { ToastProps } from 'components/Toast/interfaces';
 
 export interface ToastOptions extends ToastProps {
   id: string;

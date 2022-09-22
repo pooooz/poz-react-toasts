@@ -1,8 +1,8 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
-import { ToastManager } from 'core';
-import { inAnimations, outAnimations } from 'components/Toast/animations';
+import { ToastManager } from 'services/ToastService';
 import { ToastContainer } from 'containers/ToastContainer';
+import { inAnimations, outAnimations } from 'helpers/animations';
 
 import { Form } from './styled';
 

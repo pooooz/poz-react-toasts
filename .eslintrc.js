@@ -32,9 +32,10 @@ module.exports = {
           ['components', './components'],
           ['containers', './containers'],
           ['hooks', './hooks'],
-          ['core', './core'],
+          ['services', './services'],
           ['constants', './constants'],
           ['theme', './theme'],
+          ['helpers', './helpers'],
         ],
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
       },
@@ -90,11 +91,15 @@ module.exports = {
             group: 'internal',
           },
           {
+            pattern: 'assets/**',
+            group: 'internal',
+          },
+          {
             pattern: 'hooks/**',
             group: 'internal',
           },
           {
-            pattern: 'core/**',
+            pattern: 'services/**',
             group: 'internal',
           },
           {

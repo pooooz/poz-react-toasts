@@ -1,4 +1,4 @@
 import { ToastContainer } from './containers/ToastContainer';
-import { ToastManager } from './core';
+import { ToastManager } from './services/ToastService';
 
 export { ToastContainer, ToastManager };

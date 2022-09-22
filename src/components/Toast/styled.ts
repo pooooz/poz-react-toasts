@@ -1,19 +1,14 @@
 import styled from 'styled-components';
 
-import { inAnimations, outAnimations } from './animations';
+import { inAnimations, outAnimations } from 'helpers/animations';
 
-const toastBorderRadius = '24px';
+import { TextWrapProps, ToastTypeProps, ToastWrapProps } from './interfaces';
 
-interface ToastWrapProps {
-  type: ToastType;
-  animationName: InAnimationName | OutAnimationName | null;
-  animationTime?: number;
-  spaces?: string;
-}
+const TOAST_BORDER_RADIUS = 24;
+const FULL = '100%';
 
-interface ToastTypeProps {
-  type: ToastType;
-}
+const TOAST_WRAP_SHADOW = '4px 4px 8px rgba(0, 0, 0, 0.3)';
+
 export const ToastWrap = styled.div<ToastWrapProps>`
   display: flex;
   align-items: center;
@@ -34,39 +29,39 @@ export const ToastWrap = styled.div<ToastWrapProps>`
       return 1000;
     }}ms;
 
-  padding: ${({ theme }) => theme.spaces.s} ${({ theme }) => theme.spaces.xl};
-  margin: ${({ theme, spaces }) => spaces || theme.spaces.s} 0 0 0;
+  padding: ${({ theme }) => theme.spaces.s}px
+    ${({ theme }) => theme.spaces.xl}px;
+  margin: ${({ theme, spaces }) => spaces || theme.spaces.s}px 0 0 0;
 
   background: ${({ theme, type }) => theme.type[type].background};
   color: ${({ theme, type }) => theme.type[type].color};
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
-  border-radius: ${toastBorderRadius};
+  box-shadow: ${TOAST_WRAP_SHADOW};
+  border-radius: ${TOAST_BORDER_RADIUS}px;
 
-  height: ${({ theme }) => theme.toastHeights.l};
+  height: ${({ theme }) => theme.toastHeights.l}px;
 
   @media screen and ${({ theme }) => theme.device.tablet} {
-    height: ${({ theme }) => theme.toastHeights.m};
-    padding: ${({ theme }) => theme.spaces.s} ${({ theme }) => theme.spaces.l};
+    height: ${({ theme }) => theme.toastHeights.m}px;
+    padding: ${({ theme }) => theme.spaces.s}px
+      ${({ theme }) => theme.spaces.l}px;
   }
 
   @media screen and ${({ theme }) => theme.device.mobileL} {
-    height: ${({ theme }) => theme.toastHeights.s};
-    padding: ${({ theme }) => theme.spaces.s} ${({ theme }) => theme.spaces.s};
+    height: ${({ theme }) => theme.toastHeights.s}px;
+    padding: ${({ theme }) => theme.spaces.s}px
+      ${({ theme }) => theme.spaces.s}px;
   }
 `;
 
-interface TextWrapProps {
-  position?: 'center' | 'normal';
-}
 export const TextWrap = styled.div<TextWrapProps>`
-  margin: 0 0 0 20px;
-  height: 100%;
+  margin: 0 0 0 ${({ theme }) => theme.fontSizes.m}px;
+  height: ${FULL};
   display: flex;
   justify-content: ${({ position = 'normal' }) => position};
   flex-direction: column;
 
   @media screen and ${({ theme }) => theme.device.mobileL} {
-    margin: 0 0 0 ${({ theme }) => theme.spaces.s};
+    margin: 0 0 0 ${({ theme }) => theme.spaces.s}px;
   }
 `;
 
@@ -79,10 +74,10 @@ export const Heading = styled.h2<ToastTypeProps>`
   text-overflow: ellipsis;
   white-space: nowrap;
 
-  width: ${({ theme }) => theme.containerSizes.s};
+  width: ${({ theme }) => theme.containerSizes.s}px;
 
   @media screen and ${({ theme }) => theme.device.tablet} {
-    width: ${({ theme }) => theme.containerSizes.xs};
+    width: ${({ theme }) => theme.containerSizes.xs}px;
   }
 
   @media screen and ${({ theme }) => theme.device.mobileL} {
@@ -91,17 +86,17 @@ export const Heading = styled.h2<ToastTypeProps>`
 `;
 
 export const Message = styled.p<ToastTypeProps>`
-  margin: ${({ theme }) => theme.spaces.s} 0 0 0;
+  margin: ${({ theme }) => theme.spaces.s}px 0 0 0;
   color: ${({ theme, type }) => theme.type[type].color};
   font-size: ${({ theme }) => theme.fontSizes.m};
 
   overflow: hidden;
 
-  width: ${({ theme }) => theme.containerSizes.s};
+  width: ${({ theme }) => theme.containerSizes.s}px;
 
   @media screen and ${({ theme }) => theme.device.mobileL} {
     margin: 0;
-    width: ${({ theme }) => theme.containerSizes.xs};
-    font-size: ${({ theme }) => theme.fontSizes.s};
+    width: ${({ theme }) => theme.containerSizes.xs}px;
+    font-size: ${({ theme }) => theme.fontSizes.s}px;
   }
 `;

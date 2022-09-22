@@ -1,5 +1,5 @@
-import { ToastOptions } from 'core';
-import { inAnimations, outAnimations } from 'components/Toast/animations';
+import { ToastOptions } from 'services/ToastService';
+import { inAnimations, outAnimations } from 'helpers/animations';
 
 export {};
 

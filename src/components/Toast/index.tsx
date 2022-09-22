@@ -5,19 +5,8 @@ import { useAnimation } from 'hooks';
 
 import { iconsMap } from 'constants/index';
 
+import { ToastProps } from './interfaces';
 import { Heading, Message, TextWrap, ToastWrap } from './styled';
-
-export interface ToastProps {
-  type?: ToastType;
-  heading: string;
-  message?: string;
-  duration?: number;
-  inAnimationName?: InAnimationName;
-  outAnimationName?: OutAnimationName;
-  animationTime?: number;
-  destroy: () => void;
-  spaces?: string;
-}
 
 export const Toast = memo(
   ({
