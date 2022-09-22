@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import { ToastList } from 'components/ToastList';
-import { ToastManager } from 'core';
+import { ToastManager } from 'services/ToastService';
+import { defaultTheme } from 'theme';
 
 export const ToastContainer = () => {
   const toastRef = useRef<ToastRefActions>(null);
@@ -12,5 +14,9 @@ export const ToastContainer = () => {
     }
   }, []);
 
-  return <ToastList ref={toastRef} />;
+  return (
+    <ThemeProvider theme={defaultTheme}>
+      <ToastList ref={toastRef} />
+    </ThemeProvider>
+  );
 };

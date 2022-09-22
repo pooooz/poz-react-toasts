@@ -4,7 +4,9 @@ import { ThemeProvider } from 'styled-components';
 
 import { defaultTheme } from 'theme';
 
-import { Toast, ToastProps } from '.';
+import { ToastProps } from './interfaces';
+
+import { Toast } from '.';
 
 export default {
   title: 'components/Toast',

@@ -1,5 +1,5 @@
-import { ToastOptions } from 'core';
-import { inAnimations, outAnimations } from 'components/Toast/animations';
+import { ToastOptions } from 'services/ToastService';
+import { inAnimations, outAnimations } from 'helpers/animations';
 
 export {};
 
@@ -13,7 +13,8 @@ declare global {
     | 'bottomRight';
 
   interface ToastRefActions {
-    onToastChange: (toasts: ToastOptions[]) => void;
+    onToastAdd: (toast: ToastOptions) => void;
+    onToastRemove: (toastId: string) => void;
     onPositionChange: (position: ToastListPosition) => void;
   }
 

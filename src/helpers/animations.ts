@@ -101,3 +101,14 @@ export const outAnimations = {
     }
   `,
 };
+
+export const determineAnimation = (
+  animationName: InAnimationName | OutAnimationName | null
+) => {
+  if (animationName) {
+    return animationName in inAnimations
+      ? inAnimations[animationName as InAnimationName]
+      : outAnimations[animationName as OutAnimationName];
+  }
+  return 'none';
+};

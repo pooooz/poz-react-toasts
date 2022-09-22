@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 
-import { ToastManager } from 'core';
-import { inAnimations, outAnimations } from 'components/Toast/animations';
+import { ToastManager } from 'services/ToastService';
 import { ToastContainer } from 'containers/ToastContainer';
+import { inAnimations, outAnimations } from 'helpers/animations';
+import { useToast } from 'hooks/index';
 
 import { Form } from './styled';
 
@@ -22,18 +23,36 @@ export const Demo = () => {
     OutAnimationName | undefined
   >(undefined);
 
+  const { showInfoToast, showErrorToast, showSuccessToast, showWarningToast } =
+    useToast();
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    ToastManager.addToast({
+
+    const options = {
       heading,
       message,
       duration: Number(duration),
-      type,
       inAnimationName: inAnimation,
       outAnimationName: outAnimation,
       animationTime: Number(animationTime),
       spaces,
-    });
+    };
+
+    switch (type) {
+      case 'info':
+        showInfoToast(options);
+        break;
+      case 'warning':
+        showWarningToast(options);
+        break;
+      case 'success':
+        showSuccessToast(options);
+        break;
+      case 'error':
+        showErrorToast(options);
+        break;
+    }
   };
 
   const handleInputChange =

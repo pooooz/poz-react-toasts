@@ -10,10 +10,12 @@ module.exports = {
       ...config.resolve.alias,
       'components': path.resolve(__dirname, "../src/components"),
       'containers': path.resolve(__dirname, "../src/containers"),
+      'assets': path.resolve(__dirname, "../src/assets"),
       'hooks': path.resolve(__dirname, "../src/hooks"),
-      'core': path.resolve(__dirname, "../src/core"),
+      'services': path.resolve(__dirname, "../src/services"),
       'constants': path.resolve(__dirname, "../src/constants"),
       'theme': path.resolve(__dirname, "../src/theme"),
+      'helpers': path.resolve(__dirname, "../src/helpers"),
     };
 
     return config;
