@@ -1,14 +1,8 @@
 import React from 'react';
 
 import { CrossWrap, IconWrap } from './styled';
+import { CrossProps, IconProps } from './interfaces';
 
-export interface IconProps {
-  type: ToastType;
-}
-
-interface CrossProps extends IconProps {
-  destroy?: () => void;
-}
 export const CrossIcon = ({ type, destroy }: CrossProps) => (
   <CrossWrap type={type} onClick={destroy}>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">

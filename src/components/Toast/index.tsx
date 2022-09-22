@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 
 import { CrossIcon } from 'components/Icons';
-import { useAnimation } from 'hooks';
+import { useToastAnimation } from 'hooks';
 
 import { iconsMap } from 'constants/index';
 
@@ -20,7 +20,7 @@ export const Toast = memo(
     destroy,
     spaces,
   }: ToastProps) => {
-    const { animation, handleDelete } = useAnimation({
+    const { animation, deleteWithAnimation } = useToastAnimation({
       inAnimationName,
       outAnimationName,
       animationTime,
@@ -43,7 +43,7 @@ export const Toast = memo(
         Math.abs(startX - event.touches[0].clientX) > 100 ||
         Math.abs(startY - event.touches[0].clientY) > 100
       ) {
-        handleDelete();
+        deleteWithAnimation();
       }
     };
 
@@ -57,7 +57,7 @@ export const Toast = memo(
         Math.abs(startX - event.clientX) > 100 ||
         Math.abs(startY - event.clientY) > 100
       ) {
-        handleDelete();
+        deleteWithAnimation();
       }
     };
     return (
@@ -77,7 +77,7 @@ export const Toast = memo(
           <Heading type={type}>{heading}</Heading>
           {message && <Message type={type}>{message}</Message>}
         </TextWrap>
-        <CrossIcon type={type} destroy={handleDelete} />
+        <CrossIcon type={type} destroy={deleteWithAnimation} />
       </ToastWrap>
     );
   }

@@ -3,9 +3,7 @@ import { nanoid } from 'nanoid';
 
 import { ToastProps } from 'components/Toast/interfaces';
 
-export interface ToastOptions extends ToastProps {
-  id: string;
-}
+import { ToastOptions } from './interfaces';
 
 class ToastService {
   private static instance: ToastService;
@@ -30,23 +28,26 @@ class ToastService {
     this.containerRef = ref;
   }
 
-  public addToast(options: Omit<ToastProps, 'destroy'>) {
+  private generateToast(options: Omit<ToastProps, 'destroy'>) {
     const toastId = nanoid();
     const destroy = () => this.removeToast(toastId);
 
-    const newToast = {
+    return {
       id: toastId,
       destroy,
       ...options,
     };
+  }
+
+  public addToast(options: Omit<ToastProps, 'destroy'>) {
+    const newToast = this.generateToast(options);
 
     if (this.toasts.length >= 3) {
       this.toastQueue.push(newToast);
     } else {
       this.toasts = [...this.toasts, newToast];
+      this.containerRef?.current?.onToastAdd(newToast);
     }
-
-    this.containerRef?.current?.onToastChange(this.toasts);
   }
 
   public setPosition(position: ToastListPosition) {
@@ -57,16 +58,17 @@ class ToastService {
   public removeToast(toastId: string) {
     if (this.toasts.length >= 3) {
       this.toasts = this.toasts.filter(({ id }) => id !== toastId);
-      const nextToast = this.toastQueue.pop();
+      const nextToast = this.toastQueue.shift();
 
       if (nextToast) {
         this.toasts = [...this.toasts, nextToast];
+        this.containerRef?.current?.onToastAdd(nextToast);
       }
     } else {
       this.toasts = this.toasts.filter(({ id }) => id !== toastId);
     }
 
-    this.containerRef?.current?.onToastChange(this.toasts);
+    this.containerRef?.current?.onToastRemove(toastId);
   }
 }
 

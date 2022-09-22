@@ -13,7 +13,8 @@ declare global {
     | 'bottomRight';
 
   interface ToastRefActions {
-    onToastChange: (toasts: ToastOptions[]) => void;
+    onToastAdd: (toast: ToastOptions) => void;
+    onToastRemove: (toastId: string) => void;
     onPositionChange: (position: ToastListPosition) => void;
   }
 
