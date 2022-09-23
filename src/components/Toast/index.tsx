@@ -1,9 +1,7 @@
 import React, { memo, useState } from 'react';
 
-import { CrossIcon } from 'components/Icons';
+import { CrossIcon, Icon } from 'components/Icons';
 import { useToastAnimation } from 'hooks';
-
-import { iconsMap } from 'constants/index';
 
 import { ToastProps } from './interfaces';
 import { Heading, Message, TextWrap, ToastWrap } from './styled';
@@ -30,8 +28,6 @@ export const Toast = memo(
 
     const [startX, setStartX] = useState(0);
     const [startY, setStartY] = useState(0);
-
-    const Icon = iconsMap.get(type);
 
     const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
       setStartX(event.touches[0].clientX);
@@ -72,7 +68,7 @@ export const Toast = memo(
         onTouchMove={handleTouchMove}
         spaces={spaces}
       >
-        {Icon && <Icon type={type} />}
+        <Icon type={type} />
         <TextWrap position={message ? 'normal' : 'center'}>
           <Heading type={type}>{heading}</Heading>
           {message && <Message type={type}>{message}</Message>}

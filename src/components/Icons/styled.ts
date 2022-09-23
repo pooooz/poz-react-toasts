@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
-import { IconWrapProps } from './interfaces';
+import { IconProps } from './interfaces';
 
-const crossMargin = '20px';
+const crossMargin = 20;
 
-export const IconWrap = styled.div<IconWrapProps>`
+export const IconWrap = styled.div<IconProps>`
   fill: ${({ theme, type }) => theme.type[type].color};
   width: ${({ theme }) => theme.iconSizes.l}px;
   height: ${({ theme }) => theme.iconSizes.l}px;
@@ -20,12 +20,15 @@ export const IconWrap = styled.div<IconWrapProps>`
   }
 `;
 
-export const CrossWrap = styled.div<IconWrapProps>`
+export const IconImage = styled.img<IconProps>`
+  filter: ${({ theme, type }) => theme.type[type].iconColor};
+`;
+
+export const CrossWrap = styled.div<IconProps>`
   cursor: pointer;
   position: absolute;
-  right: ${crossMargin};
-  top: ${crossMargin};
-  fill: ${({ theme, type }) => theme.type[type].color};
+  right: ${crossMargin}px;
+  top: ${crossMargin}px;
 
   width: ${({ theme }) => theme.iconSizes.crossSizes.l}px;
   height: ${({ theme }) => theme.iconSizes.crossSizes.l}px;

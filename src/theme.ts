@@ -1,6 +1,10 @@
 import { DefaultTheme } from 'styled-components';
 
+const whiteFilter =
+  'invert(100%) sepia(0%) saturate(2%) hue-rotate(230deg)\n    brightness(108%) contrast(101%)';
 const whiteColor = '#FFFFFF';
+const blackFilter =
+  'invert(0%) sepia(96%) saturate(0%) hue-rotate(40deg) brightness(98%) contrast(103%)';
 const blackColor = '#000000';
 
 const infoBackground = '#9A40D3';
@@ -11,18 +15,22 @@ const successBackground = '#37E29A';
 const type = {
   info: {
     background: infoBackground,
+    iconColor: whiteFilter,
     color: whiteColor,
   },
   warning: {
     background: warningBackground,
+    iconColor: blackFilter,
     color: blackColor,
   },
   error: {
     background: errorBackground,
+    iconColor: whiteFilter,
     color: whiteColor,
   },
   success: {
     background: successBackground,
+    iconColor: whiteFilter,
     color: whiteColor,
   },
 };

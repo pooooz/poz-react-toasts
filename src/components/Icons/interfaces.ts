@@ -5,7 +5,3 @@ export interface IconProps {
 export interface CrossProps extends IconProps {
   destroy?: () => void;
 }
-
-export interface IconWrapProps {
-  type: ToastType;
-}
