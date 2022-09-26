@@ -1,6 +1,6 @@
 {
   "name": "poz-react-toasts",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "React toast library",
   "main": "./lib/index.js",
   "module": "./lib/index.esm.js",
@@ -64,10 +64,10 @@
     "typescript-plugin-styled-components": "^2.0.0"
   },
   "peerDependencies": {
+    "nanoid": "^4.0.0",
     "react": "*",
     "react-dom": "*",
-    "styled-components": "*",
-    "nanoid": "^4.0.0"
+    "styled-components": "*"
   },
   "browser": {
     "crypto": false

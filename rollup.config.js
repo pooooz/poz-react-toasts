@@ -11,6 +11,7 @@ const styledComponentsTransformer = createStyledComponentsTransformer({
   displayName: true,
 });
 
+const defaults = { compilerOptions: { declaration: true } };
 export default {
   input: 'src/index.ts',
   external: ['styled-components'],
@@ -31,6 +32,8 @@ export default {
     resolve(),
     commonjs(),
     typescript({
+      tsconfigDefaults: defaults,
+      tsconfig: 'tsconfig.json',
       useTsconfigDeclarationDir: true,
       transformers: [
         () => ({

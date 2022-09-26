@@ -3,6 +3,7 @@ import {
   useCallback,
   useEffect,
   useImperativeHandle,
+  useRef,
   useState,
 } from 'react';
 
@@ -23,39 +24,43 @@ export const useToastAnimation = ({
     InAnimationName | OutAnimationName | null
   >(inAnimationName || null);
 
-  let animationTimer: NodeJS.Timer;
-  let destroyTimer: NodeJS.Timer;
+  const animationRef = useRef<NodeJS.Timeout | null>(null);
+  const destroyRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     if (!duration || !destroy) return;
 
     if (outAnimationName) {
-      animationTimer = setTimeout(() => {
+      animationRef.current = setTimeout(() => {
         setAnimation(outAnimationName as OutAnimationName);
       }, duration - (animationTime || 1000));
     }
 
-    destroyTimer = setTimeout(() => {
+    destroyRef.current = setTimeout(() => {
       destroy();
     }, duration);
 
     return () => {
-      clearTimeout(animationTimer);
-      clearTimeout(destroyTimer);
+      if (animationRef.current !== null) {
+        clearTimeout(animationRef.current);
+      }
+      if (destroyRef.current !== null) {
+        clearTimeout(destroyRef.current);
+      }
     };
   }, [destroy, duration]);
 
   const deleteWithAnimation = () => {
-    if (destroyTimer) {
-      clearTimeout(destroyTimer);
+    if (animationRef.current) {
+      clearTimeout(animationRef.current);
     }
-    if (animationTimer) {
-      clearTimeout(animationTimer);
+    if (destroyRef.current) {
+      clearTimeout(destroyRef.current);
     }
-
     if (!outAnimationName) {
       destroy();
     }
+
     setAnimation(outAnimationName as OutAnimationName);
     setTimeout(() => destroy(), (animationTime || 1000) - 100);
   };
