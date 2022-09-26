@@ -1,7 +1,8 @@
 import React, { memo, useState } from 'react';
 
-import { CrossIcon, Icon } from 'components/Icons';
 import { useToastAnimation } from 'hooks';
+import { CrossIcon } from 'components/Icons/CrossIcon';
+import { ToastIcon } from 'components/Icons/ToastIcon';
 
 import { ToastProps } from './interfaces';
 import { Heading, Message, TextWrap, ToastWrap } from './styled';
@@ -68,7 +69,7 @@ export const Toast = memo(
         onTouchMove={handleTouchMove}
         spaces={spaces}
       >
-        <Icon type={type} />
+        <ToastIcon type={type} />
         <TextWrap position={message ? 'normal' : 'center'}>
           <Heading type={type}>{heading}</Heading>
           {message && <Message type={type}>{message}</Message>}
