@@ -1,6 +1,6 @@
 {
   "name": "poz-react-toasts",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "React toast library",
   "main": "./lib/index.js",
   "module": "./lib/index.esm.js",
@@ -8,6 +8,7 @@
   "repository": "git@github.com:pooooz/poz-react-toasts.git",
   "author": "POZ <antoivans@gmail.com>",
   "license": "MIT",
+  "keywords": ["react", "toasts", "popup", "notification"],
   "scripts": {
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
