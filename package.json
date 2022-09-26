@@ -1,6 +1,6 @@
 {
   "name": "poz-react-toasts",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "React toast library",
   "main": "./lib/index.js",
   "module": "./lib/index.esm.js",
