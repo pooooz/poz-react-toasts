@@ -13,3 +13,4 @@ yarn-error.log
 .eslintignore
 .storybook
 build-storybook.log
+stories
